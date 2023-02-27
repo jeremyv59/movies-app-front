@@ -6,8 +6,6 @@ interface IUserEndpoints {
   signup: string;
   getInfo: string;
   passwordUpdate: string;
-  //   getFavorites: string;
-  //   addFavorite: string;
 }
 
 interface ISigninParams {
@@ -33,8 +31,6 @@ const userEndpoints: IUserEndpoints = {
   signup: "user/signup",
   getInfo: "user/info",
   passwordUpdate: "user/update-password",
-  //   getFavorites: "user/favorites",
-  //   addFavorite: "user/favorites",
 };
 
 const userApi = {
