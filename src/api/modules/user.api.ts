@@ -1,30 +1,11 @@
 import privateClient from "../client/private.client";
 import publicClient from "../client/public.client";
-
-interface IUserEndpoints {
-  signin: string;
-  signup: string;
-  getInfo: string;
-  passwordUpdate: string;
-}
-
-interface ISigninParams {
-  username: string;
-  password: string;
-}
-
-interface ISignupParams {
-  username: string;
-  password: string;
-  confirmPassword: string;
-  displayName: string;
-}
-
-interface IPwdUpdateParams {
-  password: string;
-  newPassword: string;
-  confirmNewPassword: string;
-}
+import {
+  IUserEndpoints,
+  ISigninParams,
+  ISignupParams,
+  IPwdUpdateParams,
+} from "./interfaces/user";
 
 const userEndpoints: IUserEndpoints = {
   signin: "user/signin",
