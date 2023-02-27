@@ -22,6 +22,12 @@ interface ISignupParams {
   displayName: string;
 }
 
+interface IPwdUpdateParams {
+  password: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
 const userEndpoints: IUserEndpoints = {
   signin: "user/signin",
   signup: "user/signup",
@@ -69,6 +75,26 @@ const userApi = {
   getInfo: async (): Promise<Response | unknown> => {
     try {
       const response: Response = await privateClient.get(userEndpoints.getInfo);
+
+      return { response };
+    } catch (err: unknown) {
+      return { err };
+    }
+  },
+  updatePassword: async ({
+    password,
+    newPassword,
+    confirmNewPassword,
+  }: IPwdUpdateParams): Promise<Response | unknown> => {
+    try {
+      const response: Response = await privateClient.put(
+        userEndpoints.passwordUpdate,
+        {
+          password,
+          newPassword,
+          confirmNewPassword,
+        }
+      );
 
       return { response };
     } catch (err: unknown) {
