@@ -10,7 +10,7 @@ interface IUserEndpoints {
   addFavorite: string;
 }
 
-interface SigninParams {
+interface IUserLogParams {
   username: string;
   password: string;
 }
@@ -25,14 +25,18 @@ const userEndpoints: IUserEndpoints = {
 };
 
 const userApi = {
-  signin: async ({ username, password }: SigninParams) => {
+  signin: async ({
+    username,
+    password,
+  }: IUserLogParams): Promise<Response | unknown> => {
     try {
       const response: Response = await publicClient.post(userEndpoints.signin, {
         username,
         password,
       });
+
       return { response };
-    } catch (err) {
+    } catch (err: unknown) {
       return { err };
     }
   },
