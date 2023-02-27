@@ -4,4 +4,12 @@ interface IReviewEndpoints {
   remove(reviewId: number): string;
 }
 
-export { IReviewEndpoints };
+interface IAddReviewParams {
+  mediaId: number;
+  mediaType: string;
+  mediaTitle: string;
+  mediaPoster: string;
+  content: string;
+}
+
+export { IReviewEndpoints, IAddReviewParams };
