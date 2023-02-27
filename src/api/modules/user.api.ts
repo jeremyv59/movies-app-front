@@ -66,6 +66,15 @@ const userApi = {
       return { err };
     }
   },
+  getInfo: async (): Promise<Response | unknown> => {
+    try {
+      const response: Response = await privateClient.get(userEndpoints.getInfo);
+
+      return { response };
+    } catch (err: unknown) {
+      return { err };
+    }
+  },
 };
 
 export default userApi;
