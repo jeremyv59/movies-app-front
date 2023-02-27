@@ -1,10 +1,14 @@
 import privateClient from "../client/private.client";
-import { IAddReviewParams, IReviewEndpoints } from "./interfaces/review";
+import {
+  IAddReviewParams,
+  IRemoveReviewParams,
+  IReviewEndpoints,
+} from "./interfaces/review";
 
 const reviewEndpoints: IReviewEndpoints = {
   list: "reviews",
   add: "reviews",
-  remove: (reviewId) => `reviews/${reviewId}`,
+  remove: ({ reviewId }: any) => `reviews/${reviewId}`,
 };
 
 const reviewApi = {
@@ -23,6 +27,31 @@ const reviewApi = {
         mediaPoster,
         content,
       });
+
+      return { response };
+    } catch (err: unknown) {
+      return { err };
+    }
+  },
+  remove: async ({
+    reviewId,
+  }: IRemoveReviewParams): Promise<Response | unknown> => {
+    try {
+      const response: Response = await privateClient.post(
+        reviewEndpoints.remove,
+        {
+          reviewId,
+        }
+      );
+
+      return { response };
+    } catch (err: unknown) {
+      return { err };
+    }
+  },
+  getList: async (): Promise<Response | unknown> => {
+    try {
+      const response: Response = await privateClient.get(reviewEndpoints.list);
 
       return { response };
     } catch (err: unknown) {

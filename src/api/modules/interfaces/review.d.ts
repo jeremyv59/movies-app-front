@@ -1,7 +1,7 @@
 interface IReviewEndpoints {
   list: string;
   add: string;
-  remove(reviewId: number): string;
+  remove: any;
 }
 
 interface IAddReviewParams {
@@ -12,4 +12,8 @@ interface IAddReviewParams {
   content: string;
 }
 
-export { IReviewEndpoints, IAddReviewParams };
+interface IRemoveReviewParams {
+  reviewId: number;
+}
+
+export { IReviewEndpoints, IAddReviewParams, IRemoveReviewParams };
