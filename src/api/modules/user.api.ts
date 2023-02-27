@@ -6,13 +6,20 @@ interface IUserEndpoints {
   signup: string;
   getInfo: string;
   passwordUpdate: string;
-  getFavorites: string;
-  addFavorite: string;
+  //   getFavorites: string;
+  //   addFavorite: string;
 }
 
-interface IUserLogParams {
+interface ISigninParams {
   username: string;
   password: string;
+}
+
+interface ISignupParams {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  displayName: string;
 }
 
 const userEndpoints: IUserEndpoints = {
@@ -20,15 +27,15 @@ const userEndpoints: IUserEndpoints = {
   signup: "user/signup",
   getInfo: "user/info",
   passwordUpdate: "user/update-password",
-  getFavorites: "user/favorites",
-  addFavorite: "user/favorites",
+  //   getFavorites: "user/favorites",
+  //   addFavorite: "user/favorites",
 };
 
 const userApi = {
   signin: async ({
     username,
     password,
-  }: IUserLogParams): Promise<Response | unknown> => {
+  }: ISigninParams): Promise<Response | unknown> => {
     try {
       const response: Response = await publicClient.post(userEndpoints.signin, {
         username,
@@ -40,10 +47,25 @@ const userApi = {
       return { err };
     }
   },
-  signup: async ({}) => {
+  signup: async ({
+    username,
+    password,
+    confirmPassword,
+    displayName,
+  }: ISignupParams): Promise<Response | unknown> => {
     try {
-    } catch (err) {
+      const response: Response = await publicClient.post(userEndpoints.signup, {
+        username,
+        password,
+        confirmPassword,
+        displayName,
+      });
+
+      return { response };
+    } catch (err: unknown) {
       return { err };
     }
   },
 };
+
+export default userApi;
